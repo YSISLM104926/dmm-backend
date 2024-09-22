@@ -135,13 +135,10 @@ app.post('/api/donation', async (req, res) => {
   const { name, email, amount } = req.body;
   console.log(name, email, amount);
   try {
-    await pool.query(
+    const result = await pool.query(
       'INSERT INTO donations (name, email, amount, relief_type) VALUES ($1, $2, $3, $4) RETURNING *',
       [name, email, amount, 'Relief']
     )
-    const result = await pool.query('INSERT INTO inventory (people_name, people_email, donation, relief_type) VALUES ($1, $2, $3, $4) RETURNING *',
-      [name, email, amount, 'Relief']
-    );
     console.log(result);
     res.status(201).json(result.rows[0]);
   } catch (error) {
