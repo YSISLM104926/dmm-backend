@@ -14,7 +14,11 @@ app.use(express.json());
 
 // Database connection
 const pool = new Pool({
-  connectionString: process.env.POSTGRES_URL,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  database: process.env.DB_NAME,
 })
 
 // Middleware to verify JWT token
