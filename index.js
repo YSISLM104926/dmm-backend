@@ -175,8 +175,8 @@ app.get('/api/donation&expenses/total', async (req, res) => {
     const result = await pool.query(`
       SELECT
         DATE_TRUNC('day', COALESCE(donations.updated_at, inventory.updated_at)) AS date,
-        CAST(COALESCE(SUM(donations.amount), 0) AS INTEGER) AS total_donations,
-        CAST(SUM(COALESCE(inventory.price, 0) / 2) AS INTEGER) AS total_expenses
+        COALESCE(SUM(donations.amount), 0) AS total_donations,
+        COALESCE(SUM(inventory.price) / 2, 0) AS total_expenses
       FROM
         donations
       FULL OUTER JOIN
@@ -188,6 +188,12 @@ app.get('/api/donation&expenses/total', async (req, res) => {
       ORDER BY
         date;
     `);
+
+    // Check if there are any results
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: 'No data found for donations and expenses.' });
+    }
+
     res.json(result.rows);
   } catch (error) {
     console.error('Error fetching total donations and expenses:', error);
