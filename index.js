@@ -10,6 +10,9 @@ const crisisRoutes = require('./routes/crisis.routes')
 const donationRoutes = require('./routes/donation.routes')
 const inventoryRoutes = require('./routes/inventory.routes')
 const volunteerRoutes = require('./routes/volunteer.routes')
+
+const PORT = process.env.PORT || 5000;
+
 //middleware
 app.use(cors());
 app.use(express.json());
@@ -28,15 +31,14 @@ app.use(inventoryRoutes);
 app.use(volunteerRoutes);
 
 
-app.use('/', async (req, res) => {
+
+app.get('/', async (req, res) => {
   res.send('Server is running');
 })
 
-// Server listenting
-const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
 
 module.exports = pool;
