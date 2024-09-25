@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../server')
+const pool = require('../index')
 
 router.post('/api/crisis', async (req, res) => {
     console.log('dddd');

@@ -1,7 +1,7 @@
 
 const express = require('express');
 const router = express.Router();
-const pool = require('../server')
+const pool = require('../index')
 
 // Volunteer Routes
 router.post('/api/volunteer', async (req, res) => {

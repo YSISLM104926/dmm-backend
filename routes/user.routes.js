@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-const pool = require('../server')
+const pool = require('../index')
 // Route for user registration
 
 router.post('/api/auth/register', async (req, res) => {

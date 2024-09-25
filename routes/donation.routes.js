@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const fastcsv = require('fast-csv');
-const pool = require('../server')
+const pool = require('../index')
 
 router.post('/api/donation', async (req, res) => {
     const { name, email, amount } = req.body;
