@@ -7,7 +7,6 @@ const crisisRoutes = require('./routes/crisis.routes')
 const donationRoutes = require('./routes/donation.routes')
 const inventoryRoutes = require('./routes/inventory.routes')
 const volunteerRoutes = require('./routes/volunteer.routes')
-
 const PORT = process.env.PORT || 5000;
 
 //middleware
@@ -22,13 +21,23 @@ app.use('/api', donationRoutes);
 app.use('/api', inventoryRoutes);
 app.use('/api', volunteerRoutes);
 
+app.use(express.urlencoded({ extended: true }));
+
+
+// Routes
+app.use(userRoutes);
+app.use(crisisRoutes);
+app.use(donationRoutes);
+app.use(inventoryRoutes);
+app.use(volunteerRoutes);
+
 
 app.get('/', async (req, res) => {
   res.send('Server is running');
 })
 
-
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
