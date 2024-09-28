@@ -21,16 +21,6 @@ app.use('/api', donationRoutes);
 app.use('/api', inventoryRoutes);
 app.use('/api', volunteerRoutes);
 
-app.use(express.urlencoded({ extended: true }));
-
-
-// Routes
-app.use(userRoutes);
-app.use(crisisRoutes);
-app.use(donationRoutes);
-app.use(inventoryRoutes);
-app.use(volunteerRoutes);
-
 
 app.get('/', async (req, res) => {
   res.send('Server is running');
